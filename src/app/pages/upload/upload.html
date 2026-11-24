@@ -1,0 +1,72 @@
+<main class="wrap">
+  <a class="back" href="/">← Ubah grup</a>
+  <h1>Upload struk 📸</h1>
+  <p class="sub">{{ bill.groupName() }} · {{ bill.members().join(', ') }}</p>
+
+  <label class="drop">
+    <input type="file" accept="image/*" (change)="onFile($event)" hidden />
+    @if (preview()) {
+      <img [src]="preview()" alt="Struk" />
+    } @else {
+      <span class="drop-text">📷<br />Tap buat foto / pilih struk</span>
+    }
+  </label>
+
+  @if (scanning()) {
+    <div class="scan">
+      <div class="scan-bar"><div class="scan-fill" [style.width.%]="progress()"></div></div>
+      <p>{{ status() }} {{ progress() }}%</p>
+    </div>
+  } @else if (status()) {
+    <p class="status">{{ status() }}</p>
+  }
+
+  @if (bill.items().length) {
+    <section class="card fade-in">
+      <h2>Item terbaca</h2>
+      @for (item of bill.items(); track $index) {
+        <div class="item">
+          <div class="item-top">
+            <input type="text" [ngModel]="item.name" (ngModelChange)="item.name = $event" />
+            <input type="number" [ngModel]="item.price" (ngModelChange)="item.price = +$event" />
+            <button type="button" class="del" (click)="removeItem($index)">✕</button>
+          </div>
+          <div class="who">
+            @for (m of bill.members(); track m) {
+              <button type="button" class="who-chip" [class.on]="item.participants.includes(m)" (click)="toggleParticipant(item, m)">{{ m }}</button>
+            }
+          </div>
+        </div>
+      }
+      <p class="total">Total: <b>Rp{{ total().toLocaleString('id-ID') }}</b></p>
+
+      <label>Siapa yang nalangin dulu?</label>
+      <select [ngModel]="bill.paidBy()" (ngModelChange)="bill.paidBy.set($event)">
+        @for (m of bill.members(); track m) {
+          <option [value]="m">{{ m }}</option>
+        }
+      </select>
+    </section>
+  }
+
+  <section class="card">
+    <h2>Tambah manual</h2>
+    <div class="manual">
+      <input type="text" placeholder="Nama item" [ngModel]="newName()" (ngModelChange)="newName.set($event)" />
+      <input type="number" placeholder="Harga" [ngModel]="newPrice()" (ngModelChange)="newPrice.set($event)" />
+      <button type="button" (click)="addManual()">+ Tambah</button>
+    </div>
+  </section>
+
+  <button class="cta" [disabled]="!bill.items().length" (click)="calculate()">Hitung Patungan →</button>
+  @if (calculating()) {
+  <div class="calc-overlay">
+    <div class="calc-card">
+      <div class="calc-spinner"></div>
+      <p class="calc-title">Lagi ngitung patungan...</p>
+      <p class="calc-dots"><span>.</span><span>.</span><span>.</span></p>
+      <div class="calc-shimmer"></div>
+    </div>
+  </div>
+}
+</main>

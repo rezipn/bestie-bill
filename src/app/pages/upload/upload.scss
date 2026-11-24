@@ -1,0 +1,46 @@
+:host { display: block; min-height: 100vh; background: linear-gradient(160deg, #ffe3ec, #e6dcff 55%, #d6f3ff); font-family: 'Poppins', Arial, sans-serif; color: #2b2118; }
+.wrap { max-width: 560px; margin: 0 auto; padding: 24px 20px 96px; }
+.back { color: #7c5cff; text-decoration: none; font-size: 13px; font-weight: 600; }
+h1 { font-size: 30px; margin: 12px 0 4px; letter-spacing: -.5px; }
+.sub { color: #6b5a72; font-size: 13px; margin: 0 0 18px; }
+.drop { display: block; background: rgba(255,255,255,.75); border: 2px dashed #c9b8ff; border-radius: 24px; min-height: 180px; display: grid; place-items: center; cursor: pointer; overflow: hidden; }
+.drop img { width: 100%; display: block; }
+.drop-text { text-align: center; font-size: 15px; color: #6b5a72; line-height: 1.6; }
+.scan { margin-top: 16px; }
+.scan-bar { height: 10px; background: #fff; border-radius: 999px; overflow: hidden; }
+.scan-fill { height: 100%; background: linear-gradient(90deg, #ff5e8a, #7c5cff); transition: width .3s ease; }
+.scan p, .status { font-size: 13px; color: #6b5a72; text-align: center; }
+.card { background: rgba(255,255,255,.8); backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,.8); border-radius: 24px; padding: 20px; margin-top: 16px; box-shadow: 0 12px 32px rgba(120,70,140,.12); animation: fadeUp .5s ease both; }
+.card h2 { font-size: 16px; margin: 0 0 12px; }
+.item { border-bottom: 1px solid #efe6da; padding: 12px 0; }
+.item-top { display: flex; gap: 8px; }
+.item-top input { padding: 9px 10px; border: 1px solid #e5dccb; border-radius: 10px; font-family: inherit; font-size: 14px; background: #fff; }
+.item-top input[type="text"] { flex: 1; min-width: 0; }
+.item-top input[type="number"] { width: 110px; }
+.del { border: 0; background: none; color: #c0392b; cursor: pointer; font-size: 14px; }
+.who { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.who-chip { border: 1px solid #e5dccb; background: #fff; border-radius: 999px; padding: 5px 12px; font-size: 12px; font-weight: 600; cursor: pointer; }
+.who-chip.on { background: #7c5cff; border-color: #7c5cff; color: #fff; }
+.total { font-size: 15px; margin: 14px 0 6px; }
+.card label { display: block; font-size: 13px; font-weight: 600; margin: 10px 0 6px; }
+.card select { width: 100%; padding: 11px; border: 1px solid #e5dccb; border-radius: 12px; font-family: inherit; font-size: 14px; background: #fff; }
+.manual { display: flex; gap: 8px; }
+.manual input { flex: 1; min-width: 0; padding: 11px; border: 1px solid #e5dccb; border-radius: 12px; font-family: inherit; font-size: 14px; background: #fff; }
+.manual button { border: 0; border-radius: 12px; padding: 0 16px; background: #7c5cff; color: #fff; font-weight: 700; cursor: pointer; }
+.cta { display: block; width: 100%; margin-top: 18px; padding: 16px; border: 0; border-radius: 999px; background: #2b2118; color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 10px 24px rgba(43,33,24,.3); }
+.cta:disabled { opacity: .4; cursor: not-allowed; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+.calc-overlay { position: fixed; inset: 0; background: rgba(43,33,24,.45); backdrop-filter: blur(6px); display: grid; place-items: center; z-index: 50; animation: fadeIn .3s ease both; }
+.calc-card { background: #fff; border-radius: 24px; padding: 32px 28px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,.25); animation: popIn .4s cubic-bezier(.34,1.56,.64,1) both; }
+.calc-spinner { width: 56px; height: 56px; margin: 0 auto 16px; border-radius: 50%; border: 5px solid #ffe3ec; border-top-color: #ff5e8a; border-right-color: #7c5cff; animation: spin .8s linear infinite; }
+.calc-title { font-weight: 700; font-size: 16px; margin: 0; }
+.calc-dots span { display: inline-block; font-size: 22px; font-weight: 700; color: #7c5cff; animation: bounce 1s ease-in-out infinite; }
+.calc-dots span:nth-child(2) { animation-delay: .15s; }
+.calc-dots span:nth-child(3) { animation-delay: .3s; }
+.calc-shimmer { height: 8px; margin-top: 16px; border-radius: 999px; background: linear-gradient(90deg, #ffe3ec, #e6dcff, #d6f3ff, #ffe3ec); background-size: 300% 100%; animation: shimmer 1.2s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes shimmer { from { background-position: 0% 0; } to { background-position: 300% 0; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes popIn { from { opacity: 0; transform: scale(.85); } to { opacity: 1; transform: scale(1); } }

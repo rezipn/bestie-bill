@@ -1,0 +1,33 @@
+<main class="wrap">
+  <header class="hero fade-in">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <p class="logo">🧾 Bestie Bill</p>
+    <h1>Patungan<br />tanpa drama.</h1>
+    <p class="tag">Foto struk, bagi rata, langsung ketahuan siapa bayar siapa.</p>
+  </header>
+
+  <section class="card fade-in" style="animation-delay:.15s">
+    <label>Nama acara</label>
+    <input type="text" [ngModel]="bill.groupName()" (ngModelChange)="bill.groupName.set($event)" placeholder="cth: Nongkrong Sabtu" />
+
+    <label>Siapa aja yang patungan?</label>
+    <div class="add-row">
+      <input type="text" [ngModel]="newMember()" (ngModelChange)="newMember.set($event)" (keyup.enter)="addMember()" placeholder="Nama teman..." />
+      <button type="button" (click)="addMember()">+ Tambah</button>
+    </div>
+
+    <div class="chips">
+      @for (m of bill.members(); track m) {
+        <span class="chip">{{ m }} <button type="button" (click)="removeMember(m)">✕</button></span>
+      }
+    </div>
+
+    @if (bill.members().length < 2) {
+      <p class="hint">Tambah minimal 1 teman lagi ya.</p>
+    }
+  </section>
+
+  <button class="cta fade-in" style="animation-delay:.3s" [disabled]="bill.members().length < 2" (click)="start()">
+    Lanjut Upload Struk →
+  </button>
+</main>

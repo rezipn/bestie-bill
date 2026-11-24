@@ -1,0 +1,40 @@
+<main class="wrap">
+  <header class="hero fade-in">
+    <p class="logo">🧾 Bestie Bill</p>
+    <h1>Hasil patungan 🎉</h1>
+    <p class="sub">{{ bill.groupName() }} · Total Rp{{ total().toLocaleString('id-ID') }}</p>
+  </header>
+
+  @if (bill.splitResult(); as r) {
+    <section class="card fade-in" style="animation-delay:.1s">
+      <h2>Per orang</h2>
+      @for (t of totalsList(); track t.name) {
+        <div class="row">
+          <span>{{ t.name }}</span>
+          <b>Rp{{ rupiah(t.amount) }}</b>
+        </div>
+      }
+    </section>
+
+    <section class="card settle fade-in" style="animation-delay:.25s">
+      <h2>Siapa bayar siapa</h2>
+      @for (s of r.settlements; track $index) {
+        <div class="settle-row">
+          <span class="from">{{ s.from }}</span>
+          <span class="arrow">→</span>
+          <span class="to">{{ s.to }}</span>
+          <b>Rp{{ rupiah(s.amount) }}</b>
+        </div>
+      }
+      @if (!r.settlements.length) {
+        <p class="done">✅ Udah lunas semua, nggak ada yang perlu bayar!</p>
+      }
+    </section>
+
+    <button class="cta wa fade-in" style="animation-delay:.4s" (click)="shareWA()">Share ke WhatsApp</button>
+  } @else {
+    <p class="empty">Belum ada hasil. Upload struk dulu ya.</p>
+  }
+
+  <button class="cta ghost fade-in" style="animation-delay:.5s" (click)="again()">Bikin Patungan Baru</button>
+</main>
